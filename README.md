@@ -312,41 +312,6 @@ Mentoring peers in AI/ML engineering through project guidance, concept reinforce
 
 ---
 
-# Certifications
-
-## AWS
-<p>
-  <img src="https://img.shields.io/badge/AWS-Learning_Path-1A1B27?style=for-the-badge&logo=amazonaws&logoColor=white" />
-</p>
-
-## Oracle
-<p>
-  <img src="https://img.shields.io/badge/Oracle-Engineering_Learner-2D1B69?style=for-the-badge&logo=oracle&logoColor=white" />
-</p>
-
-## NPTEL
-<p>
-  <img src="https://img.shields.io/badge/NPTEL-IIT_Bombay_LLMs_using_Python-4A148C?style=for-the-badge&logo=googleclassroom&logoColor=white" />
-</p>
-
-## Cisco
-<p>
-  <img src="https://img.shields.io/badge/Cisco-Networking_%26_Technology_Learning-311B92?style=for-the-badge&logo=cisco&logoColor=white" />
-</p>
-
----
-
-# Coding Profiles
-
-<p align="center">
-  <a href="https://leetcode.com/"><img src="https://img.shields.io/badge/LeetCode-Problem_Solving-1F1147?style=for-the-badge&logo=leetcode&logoColor=FFA116" alt="LeetCode" /></a>
-  <a href="https://www.geeksforgeeks.org/"><img src="https://img.shields.io/badge/GeeksforGeeks-DSA_%26_CS_Fundamentals-2D1B69?style=for-the-badge&logo=geeksforgeeks&logoColor=2F8D46" alt="GeeksforGeeks" /></a>
-  <a href="https://www.hackerrank.com/"><img src="https://img.shields.io/badge/HackerRank-Coding_Challenges-311B92?style=for-the-badge&logo=hackerrank&logoColor=2EC866" alt="HackerRank" /></a>
-  <a href="https://www.codechef.com/"><img src="https://img.shields.io/badge/CodeChef-Competitive_Programming-4A148C?style=for-the-badge&logo=codechef&logoColor=white" alt="CodeChef" /></a>
-</p>
-
----
-
 # GitHub Analytics
 
 <p align="center">
