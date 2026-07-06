@@ -295,13 +295,6 @@ Mentoring peers in AI/ML engineering through project guidance, concept reinforce
 
 ---
 
-# GitHub Trophies
-
-<p align="center">
-  <img src="https://github-profile-trophy.vercel.app/?username=Lakshya-2440&theme=tokyonight&no-frame=true&no-bg=true&margin-w=15&margin-h=15&column=4" alt="GitHub Trophies" />
-</p>
----
-
 # Contribution Activity
 
 <p align="center">
