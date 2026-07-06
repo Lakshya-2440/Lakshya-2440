@@ -10,7 +10,7 @@
   <img src="https://img.shields.io/badge/B.Tech_CSE_(AI%2FML)-Newton_School_of_Technology-1F1147?style=for-the-badge&logo=academia&logoColor=white" alt="NST" />
   <img src="https://img.shields.io/badge/GPA-8.91%2F10-311B92?style=for-the-badge&logo=google-scholar&logoColor=white" alt="GPA" />
   <img src="https://img.shields.io/badge/HPAIR_2026-Selected_Delegate-4A148C?style=for-the-badge&logo=harvard&logoColor=white" alt="HPAIR" />
-  <img src="https://img.shields.io/badge/Location-Pune%2C_India-2D1B69?style=for-the-badge&logo=googlemaps&logoColor=white" alt="Location" />
+  <img src="https://img.shields.io/badge/Location-South Delhi%2C_India-2D1B69?style=for-the-badge&logo=googlemaps&logoColor=white" alt="Location" />
 </p>
 
 <p align="center">
@@ -285,12 +285,12 @@ Mentoring peers in AI/ML engineering through project guidance, concept reinforce
 # GitHub Analytics
 
 <p align="center">
-  <img height="180em" src="https://github-readme-stats.vercel.app/api?username=Lakshya-2440&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=C9A7FF&icon_color=A78BFA&text_color=E6EDF3&ring_color=8B5CF6" alt="GitHub Stats" />
-  <img height="180em" src="https://streak-stats.demolab.com?user=Lakshya-2440&theme=tokyonight&hide_border=true&background=0D1117&ring=8B5CF6&fire=A78BFA&currStreakLabel=C9A7FF" alt="GitHub Streak" />
+  <img height="180em" src="https://github-readme-stats.vercel.app/api?username=Lakshya-2440&show_icons=true&include_all_commits=true&count_private=true&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=c9a7ff&icon_color=a78bfa&text_color=e6edf3" alt="GitHub Stats" />
+  <img height="180em" src="https://streak-stats.demolab.com?user=Lakshya-2440&theme=tokyonight&hide_border=true&background=0d1117&ring=8b5cf6&fire=a78bfa&currStreakLabel=c9a7ff" alt="GitHub Streak" />
 </p>
 
 <p align="center">
-  <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Lakshya-2440&layout=compact&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=C9A7FF&text_color=E6EDF3" alt="Top Languages" />
+  <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Lakshya-2440&layout=compact&langs_count=8&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=c9a7ff&text_color=e6edf3" alt="Top Languages" />
 </p>
 
 ---
@@ -300,7 +300,6 @@ Mentoring peers in AI/ML engineering through project guidance, concept reinforce
 <p align="center">
   <img src="https://github-profile-trophy.vercel.app/?username=Lakshya-2440&theme=tokyonight&no-frame=true&no-bg=true&margin-w=15&margin-h=15&column=4" alt="GitHub Trophies" />
 </p>
-
 ---
 
 # Contribution Activity
