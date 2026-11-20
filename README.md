@@ -26,6 +26,11 @@
   <a href="https://github.com/Lakshya-2440?tab=repositories&sort=stargazers"><img src="https://img.shields.io/github/stars/Lakshya-2440?affiliations=OWNER%2CCOLLABORATOR&style=for-the-badge&color=8e44ad&labelColor=1a1b27" alt="Stars" /></a>
 </p>
 
+<div align="center">
+  <img src="./cards/heatmap.svg" width="100%" alt="Lakshya's contribution graph, in blue, refreshed daily" /><br>
+  <img src="./cards/activity.svg" width="100%" alt="Contributions in the last 12 months, by month, with streak and busiest day" /><br>
+</div>
+
 ---
 
 # <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2x0eG1sdzV5OWI2d2N0Y3JwZDJ5NnZ1b2o4c29oMnJ4Z3BzNnZkYiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/xT9IgzoKnwFNmISR8I/giphy.gif" width="28" /> About
