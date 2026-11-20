@@ -27,7 +27,5 @@
 </p>
 
 <div align="center">
-  <a href="https://lakshyapf.vercel.app"><img src="./cards/hero.svg" width="100%" alt="Lakshya Gupta. Software & AI/ML Engineer." /></a><br>
-  <img src="./cards/heatmap.svg" width="100%" alt="Lakshya's contribution graph, in blue, refreshed daily" /><br>
-  <img src="./cards/activity.svg" width="100%" alt="Contributions in the last 12 months, by month, with streak and busiest day" /><br>
+  <a href="https://lakshyapf.vercel.app"><img src="./cards/card.svg" width="100%" alt="Lakshya Gupta. Software & AI/ML Engineer." /></a>
 </div>
