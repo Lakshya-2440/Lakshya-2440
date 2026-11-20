@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """
 Render the profile README's unified card as an animated SVG into cards/card.svg.
-- Combines hero identity, circular contribution radar clock, contribution heatmap,
-  and 12-month activity bar chart + stats into one single, seamless editorial card.
+- Combines hero identity + circular contribution radar clock,
+  journey timeline (age 9 to now building Autcy),
+  contribution heatmap, and 12-month activity bar chart + stats into one single,
+  seamless editorial card.
 - Red accent palette throughout.
 - No 'Every day, in blue', no 'REFRESHED DAILY', no separator divider lines.
 """
@@ -28,7 +30,7 @@ MUTED = "#6e6e73"
 RED_ACCENT = "#ef3b2d"  # Studio / Apple red
 RED = [PAPER_DEEP, "#ffd6d2", "#ffa399", "#ff6b5c", RED_ACCENT, "#b81d13"]
 
-W, H = 880, 840  # Single unified card dimensions
+W, H = 880, 960  # Single unified card dimensions
 
 SERIF = "'Instrument Serif', Georgia, serif"
 SANS = "Geist, system-ui, -apple-system, sans-serif"
@@ -93,7 +95,7 @@ def render_card(data):
     days = data["days"]
 
     # ==================== 1. HERO & RADAR CLOCK ====================
-    cx, cy = 665, 205
+    cx, cy = 665, 200
     R_in = 64
     dr = 13.5
 
@@ -150,10 +152,61 @@ def render_card(data):
 <text class="f" {d(0.8)} x="{cx}" y="{cy + 26}" text-anchor="middle" font-family="{MONO}" font-size="9" letter-spacing="0.8" fill="{RED_ACCENT}">365 DAYS</text>
 """
 
-    # ==================== 2. HEATMAP (NO HEADER / NO LINES) ====================
+    # ==================== 2. TIMELINE & MILESTONES ====================
+    timeline_nodes = [
+        ("9", "Wrote First Code", "Coding since 9", "✦ Writing code since I was 9", False),
+        ("16", "First Company", "₹40K in 10 days", "✦ Built my first company at 16 - ₹40K revenue in 10 days", False),
+        ("17", "Director General", "IIT Delhi MUN", "✦ Director General of IIT Delhi MUN at 17", False),
+        ("18", "Interviewed", "Forbes 30U30", "✦ Interviewed Forbes 30U30 founders at 18", False),
+        ("19", "Harvard Conf '26", "Amazon ML School", "✦ Selected for Harvard Conference'26 & Amazon ML Summer School'26 at 19", False),
+        ("19 · NOW", "Building Autcy", "Founder · Live", "✦ Building Autcy at 19 now", True),
+    ]
+
+    tl_x0, tl_x1 = 92, 788
+    tl_y_track = 458
+    tl_step = (tl_x1 - tl_x0) / (len(timeline_nodes) - 1)
+
+    tl_items = []
+    for i, (age, title, subtitle, full_desc, is_now) in enumerate(timeline_nodes):
+        tx = tl_x0 + i * tl_step
+        delay = 0.85 + i * 0.1
+        sub_color = RED_ACCENT if is_now else MUTED
+        marker = (
+            f'<circle class="live" cx="{tx:.1f}" cy="{tl_y_track}" r="9" fill="{RED_ACCENT}" opacity=".3"/>'
+            f'<circle cx="{tx:.1f}" cy="{tl_y_track}" r="5.5" fill="{RED_ACCENT}"/>'
+            f'<circle cx="{tx:.1f}" cy="{tl_y_track}" r="2.5" fill="{PAPER}"/>'
+            if is_now else
+            f'<circle cx="{tx:.1f}" cy="{tl_y_track}" r="4.5" fill="{PAPER}" stroke="{RED_ACCENT}" stroke-width="2"/>'
+            f'<circle cx="{tx:.1f}" cy="{tl_y_track}" r="2" fill="{RED_ACCENT}"/>'
+        )
+        age_el = (
+            f'<text class="r" {d(delay)} x="{tx:.1f}" y="{tl_y_track - 13}" text-anchor="middle" font-family="{MONO}" '
+            f'font-size="11" font-weight="600" letter-spacing="1" fill="{RED_ACCENT}">{age}</text>'
+            if is_now else
+            f'<text class="r" {d(delay)} x="{tx:.1f}" y="{tl_y_track - 12}" text-anchor="middle" font-family="{SERIF}" '
+            f'font-size="24" fill="{INK}">{age}</text>'
+        )
+        tl_items.append(
+            f'<g class="r" {d(delay)}><title>{escape(full_desc)}</title>'
+            f'{age_el}'
+            f'{marker}'
+            f'<text x="{tx:.1f}" y="{tl_y_track + 20}" text-anchor="middle" font-family="{SANS}" font-size="12" font-weight="600" fill="{INK}">{title}</text>'
+            f'<text x="{tx:.1f}" y="{tl_y_track + 35}" text-anchor="middle" font-family="{SANS}" font-size="11" fill="{sub_color}">{subtitle}</text></g>'
+        )
+
+    timeline_svg = f"""
+<g class="f" {d(0.75)}>
+  <text x="48" y="414" font-family="{MONO}" font-size="11" letter-spacing="1.5" fill="{MUTED}">✦ TIMELINE &amp; MILESTONES</text>
+  <line x1="{tl_x0}" y1="{tl_y_track}" x2="{tl_x1}" y2="{tl_y_track}" stroke="{PAPER_DEEP}" stroke-width="2"/>
+  <line class="g" style="animation-delay:0.85s" x1="{tl_x0}" y1="{tl_y_track}" x2="{tl_x1}" y2="{tl_y_track}" stroke="{RED_ACCENT}" stroke-width="1.8" stroke-linecap="round" opacity=".7"/>
+  {''.join(tl_items)}
+</g>
+"""
+
+    # ==================== 3. HEATMAP (NO HEADER / NO LINES) ====================
     first = datetime.date.fromisoformat(days[0]["date"])
     lead = (first.weekday() + 1) % 7
-    cell, step, gx, gy = 12, 15, 44, 412
+    cell, step, gx, gy = 12, 15, 44, 535
     grid_cells, cal_months, seen_cal = [], [], set()
     for i, day in enumerate(days):
         k = i + lead
@@ -163,7 +216,7 @@ def render_card(data):
             seen_cal.add((date.year, date.month))
             cal_months.append((col, date.strftime("%b")))
         c = day["count"]
-        delay = 0.4 + col * 0.02 + row * 0.015
+        delay = 0.5 + col * 0.02 + row * 0.015
         grid_cells.append(
             f'<rect class="p" style="animation-delay:{delay:.2f}s" x="{gx + col * step}" y="{gy + row * step}" '
             f'width="{cell}" height="{cell}" rx="3" fill="{RED[level_for(c)]}">'
@@ -182,11 +235,11 @@ def render_card(data):
         for i, c in enumerate(RED)
     )
 
-    # ==================== 3. ACTIVITY (NO DIVIDER LINES) ====================
+    # ==================== 4. ACTIVITY (NO DIVIDER LINES) ====================
     monthly = data["monthly"][-12:]
     best = max(monthly[:-1] or monthly, key=lambda m: m["total"])
     top = max(1, best["total"])
-    x0, x1, base, maxh, gap = 44, 570, 780, 115, 10
+    x0, x1, base, maxh, gap = 44, 570, 895, 110, 10
     bw = (x1 - x0 - gap * (len(monthly) - 1)) / len(monthly)
     bars = []
     for i, m in enumerate(monthly):
@@ -197,9 +250,9 @@ def render_card(data):
         fill = RED_ACCENT if is_best else ("#c9c9c4" if partial else INK)
         label = datetime.date.fromisoformat(m["month"] + "-01").strftime("%b")
         bars.append(
-            f'<rect class="g" style="animation-delay:{0.4 + i * 0.07:.2f}s" x="{x:.1f}" y="{base - bh}" '
+            f'<rect class="g" style="animation-delay:{0.5 + i * 0.07:.2f}s" x="{x:.1f}" y="{base - bh}" '
             f'width="{bw:.1f}" height="{bh}" rx="4" fill="{fill}"><title>{label}: {m["total"]:,}</title></rect>'
-            f'<text class="f" style="animation-delay:{0.4 + i * 0.07:.2f}s" x="{x + bw / 2:.1f}" y="{base + 22}" '
+            f'<text class="f" style="animation-delay:{0.5 + i * 0.07:.2f}s" x="{x + bw / 2:.1f}" y="{base + 22}" '
             f'text-anchor="middle" font-family="{MONO}" font-size="11" fill="{MUTED}">{label}</text>'
         )
         if is_best:
@@ -219,7 +272,7 @@ def render_card(data):
     ]
     side = []
     for i, (big, small) in enumerate(stats):
-        y = 622 + i * 78  # Clean vertical rhythm without rule lines
+        y = 744 + i * 78  # Clean vertical rhythm without rule lines
         side.append(
             f'<g class="r" {d(0.7 + i * 0.15)}>'
             f'<text x="640" y="{y}" font-family="{SERIF}" font-size="38" fill="{INK}">{big}</text>'
@@ -245,20 +298,20 @@ def render_card(data):
 <!-- Single Seamless Card Surface -->
 <rect width="{W}" height="{H}" rx="16" fill="{PAPER}"/>
 
-<!-- ===== TOP: IDENTITY & RADAR ===== -->
+<!-- ===== 1. TOP: IDENTITY & RADAR ===== -->
 <g class="f" {d(0)}>
   <rect class="live" x="48" y="49" width="8" height="8" rx="2" fill="{RED_ACCENT}"/>
   <text x="66" y="57" font-family="{MONO}" font-size="12" letter-spacing="1" fill="{MUTED}">SOFTWARE &amp; AI/ML ENGINEER</text>
 </g>
-<text class="r" {d(0.15)} x="44" y="180" font-family="{SERIF}" font-size="108" letter-spacing="-2.5" fill="{INK}">Lakshya</text>
-<text class="r" {d(0.3)} x="44" y="272" font-family="{SERIF}" font-style="italic" font-size="108" letter-spacing="-2.5" fill="url(#shine)">Gupta</text>
+<text class="r" {d(0.15)} x="44" y="175" font-family="{SERIF}" font-size="104" letter-spacing="-2.5" fill="{INK}">Lakshya</text>
+<text class="r" {d(0.3)} x="44" y="265" font-family="{SERIF}" font-style="italic" font-size="104" letter-spacing="-2.5" fill="url(#shine)">Gupta</text>
 <g class="r" {d(0.55)}>
-  <text x="48" y="318" font-family="{SANS}" font-size="17" fill="{INK_SOFT}">Building production-grade AI systems, agentic RAG,</text>
-  <text x="48" y="344" font-family="{SANS}" font-size="17" fill="{INK_SOFT}">and high-performance full-stack applications.</text>
+  <text x="48" y="308" font-family="{SANS}" font-size="17" fill="{INK_SOFT}">Building production-grade AI systems, agentic RAG,</text>
+  <text x="48" y="333" font-family="{SANS}" font-size="17" fill="{INK_SOFT}">and high-performance full-stack applications.</text>
 </g>
 <g class="f" {d(0.8)}>
-  <text x="48" y="378" font-family="{MONO}" font-size="13" fill="{INK}">lakshyapf.me</text>
-  <text class="nu" x="152" y="378" font-family="{MONO}" font-size="13" fill="{RED_ACCENT}">&#8599;</text>
+  <text x="48" y="368" font-family="{MONO}" font-size="13" fill="{INK}">lakshyapf.me</text>
+  <text class="nu" x="152" y="368" font-family="{MONO}" font-size="13" fill="{RED_ACCENT}">&#8599;</text>
 </g>
 
 <!-- Radar Clock -->
@@ -270,16 +323,19 @@ def render_card(data):
 </g>
 {radar_hub}
 
-<!-- ===== MIDDLE: HEATMAP GRID (NO HEADERS, NO LINES) ===== -->
+<!-- ===== 2. JOURNEY TIMELINE ===== -->
+{timeline_svg}
+
+<!-- ===== 3. HEATMAP GRID (NO HEADERS, NO LINES) ===== -->
 {''.join(grid_cells)}
 <g class="f" {d(1.5)}>{cal_labels}
 <text x="{legend_x - 8}" y="{gy + 7 * step + 16}" text-anchor="end" font-family="{MONO}" font-size="11" fill="{MUTED}">less</text>
 {cal_legend}
 <text x="{legend_x + len(RED) * 14 + 2}" y="{gy + 7 * step + 16}" font-family="{MONO}" font-size="11" fill="{MUTED}">more</text></g>
 
-<!-- ===== BOTTOM: ACTIVITY & STREAKS (NO DIVIDER LINES) ===== -->
-<text class="f" {d(0.2)} x="44" y="580" font-family="{MONO}" font-size="12" letter-spacing="1" fill="{MUTED}">THE LAST 12 MONTHS ON GITHUB</text>
-<text class="r" {d(0.3)} x="42" y="628" font-family="{SERIF}" font-size="48" fill="{INK}">{data["total_contributions"]:,} <tspan font-style="italic">contributions</tspan></text>
+<!-- ===== 4. ACTIVITY & STREAKS (NO DIVIDER LINES) ===== -->
+<text class="f" {d(0.2)} x="44" y="700" font-family="{MONO}" font-size="12" letter-spacing="1" fill="{MUTED}">THE LAST 12 MONTHS ON GITHUB</text>
+<text class="r" {d(0.3)} x="42" y="746" font-family="{SERIF}" font-size="48" fill="{INK}">{data["total_contributions"]:,} <tspan font-style="italic">contributions</tspan></text>
 {''.join(bars)}
 {''.join(side)}
 """
@@ -291,7 +347,6 @@ def render_card(data):
     )
 
     write("card.svg", svg_content)
-    # Also write to hero.svg for backward compatibility
     write("hero.svg", svg_content)
 
 
