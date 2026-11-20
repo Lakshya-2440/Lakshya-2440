@@ -14,7 +14,7 @@
 </p>
 
 <p align="center">
-  <a href="https://lakshyapf.vercel.app"><img src="https://img.shields.io/badge/Portfolio-0F0C29?style=for-the-badge&logo=vercel&logoColor=white" alt="Portfolio" /></a>
+  <a href="https://www.lakshyapf.me/"><img src="https://img.shields.io/badge/Portfolio-0F0C29?style=for-the-badge&logo=vercel&logoColor=white" alt="Portfolio" /></a>
   <a href="https://linkedin.com/in/lakshyaa"><img src="https://img.shields.io/badge/LinkedIn-1B1464?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
   <a href="mailto:lakshyagupta2440@gmail.com"><img src="https://img.shields.io/badge/Email-311B92?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" /></a>
   <a href="https://github.com/Lakshya-2440"><img src="https://img.shields.io/badge/GitHub-24243E?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" /></a>
@@ -27,5 +27,5 @@
 </p>
 
 <div align="center">
-  <a href="https://lakshyapf.vercel.app"><img src="./cards/card.svg" width="100%" alt="Lakshya Gupta. Software & AI/ML Engineer." /></a>
+  <a href="https://www.lakshyapf.me/"><img src="./cards/card.svg" width="100%" alt="Lakshya Gupta. Software & AI/ML Engineer." /></a>
 </div>

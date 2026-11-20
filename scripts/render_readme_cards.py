@@ -257,8 +257,8 @@ def render_card(data):
   <text x="48" y="344" font-family="{SANS}" font-size="17" fill="{INK_SOFT}">and high-performance full-stack applications.</text>
 </g>
 <g class="f" {d(0.8)}>
-  <text x="48" y="378" font-family="{MONO}" font-size="13" fill="{INK}">lakshyapf.vercel.app</text>
-  <text class="nu" x="210" y="378" font-family="{MONO}" font-size="13" fill="{RED_ACCENT}">&#8599;</text>
+  <text x="48" y="378" font-family="{MONO}" font-size="13" fill="{INK}">lakshyapf.me</text>
+  <text class="nu" x="152" y="378" font-family="{MONO}" font-size="13" fill="{RED_ACCENT}">&#8599;</text>
 </g>
 
 <!-- Radar Clock -->
