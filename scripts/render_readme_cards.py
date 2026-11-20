@@ -30,7 +30,7 @@ MUTED = "#6e6e73"
 RED_ACCENT = "#ef3b2d"  # Studio / Apple red
 RED = [PAPER_DEEP, "#ffd6d2", "#ffa399", "#ff6b5c", RED_ACCENT, "#b81d13"]
 
-W, H = 880, 960  # Single unified card dimensions
+W, H = 880, 930  # Single unified card dimensions
 
 SERIF = "'Instrument Serif', Georgia, serif"
 SANS = "Geist, system-ui, -apple-system, sans-serif"
@@ -154,23 +154,22 @@ def render_card(data):
 
     # ==================== 2. TIMELINE & MILESTONES ====================
     timeline_nodes = [
-        ("9", "Wrote First Code", "Coding since 9", "✦ Writing code since I was 9", False),
-        ("16", "First Company", "₹40K in 10 days", "✦ Built my first company at 16 - ₹40K revenue in 10 days", False),
-        ("17", "Director General", "IIT Delhi MUN", "✦ Director General of IIT Delhi MUN at 17", False),
-        ("18", "Interviewed", "Forbes 30U30", "✦ Interviewed Forbes 30U30 founders at 18", False),
-        ("19", "Harvard Conf '26", "Amazon ML School", "✦ Selected for Harvard Conference'26 & Amazon ML Summer School'26 at 19", False),
-        ("19 · NOW", "Building Autcy", "Founder · Live", "✦ Building Autcy at 19 now", True),
+        ("9", "Wrote First Code", "Coding since 9", "✦ Writing code since I was 9", False, MUTED),
+        ("16", "First Company", "$400 in 10 days", "✦ Built my first company at 16 - $400 revenue in 10 days", False, MUTED),
+        ("17", "Director General", "IIT Delhi MUN", "✦ Director General of IIT Delhi MUN at 17", False, MUTED),
+        ("18", "Interviewed", "Forbes 30U30", "✦ Interviewed Forbes 30U30 founders at 18", False, MUTED),
+        ("19", "HPAIR'26", "Amazon ML Summer School", "✦ Selected for HPAIR'26 & Amazon ML Summer School'26 at 19", False, INK),
+        ("19 · NOW", "Building Autcy", "Founder · Live", "✦ Building Autcy at 19 now", True, RED_ACCENT),
     ]
 
     tl_x0, tl_x1 = 92, 788
-    tl_y_track = 458
+    tl_y_track = 432
     tl_step = (tl_x1 - tl_x0) / (len(timeline_nodes) - 1)
 
     tl_items = []
-    for i, (age, title, subtitle, full_desc, is_now) in enumerate(timeline_nodes):
+    for i, (age, title, subtitle, full_desc, is_now, sub_color) in enumerate(timeline_nodes):
         tx = tl_x0 + i * tl_step
         delay = 0.85 + i * 0.1
-        sub_color = RED_ACCENT if is_now else MUTED
         marker = (
             f'<circle class="live" cx="{tx:.1f}" cy="{tl_y_track}" r="9" fill="{RED_ACCENT}" opacity=".3"/>'
             f'<circle cx="{tx:.1f}" cy="{tl_y_track}" r="5.5" fill="{RED_ACCENT}"/>'
@@ -196,7 +195,6 @@ def render_card(data):
 
     timeline_svg = f"""
 <g class="f" {d(0.75)}>
-  <text x="48" y="414" font-family="{MONO}" font-size="11" letter-spacing="1.5" fill="{MUTED}">✦ TIMELINE &amp; MILESTONES</text>
   <line x1="{tl_x0}" y1="{tl_y_track}" x2="{tl_x1}" y2="{tl_y_track}" stroke="{PAPER_DEEP}" stroke-width="2"/>
   <line class="g" style="animation-delay:0.85s" x1="{tl_x0}" y1="{tl_y_track}" x2="{tl_x1}" y2="{tl_y_track}" stroke="{RED_ACCENT}" stroke-width="1.8" stroke-linecap="round" opacity=".7"/>
   {''.join(tl_items)}
@@ -206,7 +204,7 @@ def render_card(data):
     # ==================== 3. HEATMAP (NO HEADER / NO LINES) ====================
     first = datetime.date.fromisoformat(days[0]["date"])
     lead = (first.weekday() + 1) % 7
-    cell, step, gx, gy = 12, 15, 44, 535
+    cell, step, gx, gy = 12, 15, 44, 508
     grid_cells, cal_months, seen_cal = [], [], set()
     for i, day in enumerate(days):
         k = i + lead
@@ -239,7 +237,7 @@ def render_card(data):
     monthly = data["monthly"][-12:]
     best = max(monthly[:-1] or monthly, key=lambda m: m["total"])
     top = max(1, best["total"])
-    x0, x1, base, maxh, gap = 44, 570, 895, 110, 10
+    x0, x1, base, maxh, gap = 44, 570, 868, 110, 10
     bw = (x1 - x0 - gap * (len(monthly) - 1)) / len(monthly)
     bars = []
     for i, m in enumerate(monthly):
@@ -272,7 +270,7 @@ def render_card(data):
     ]
     side = []
     for i, (big, small) in enumerate(stats):
-        y = 744 + i * 78  # Clean vertical rhythm without rule lines
+        y = 716 + i * 78  # Clean vertical rhythm without rule lines
         side.append(
             f'<g class="r" {d(0.7 + i * 0.15)}>'
             f'<text x="640" y="{y}" font-family="{SERIF}" font-size="38" fill="{INK}">{big}</text>'
@@ -334,8 +332,8 @@ def render_card(data):
 <text x="{legend_x + len(RED) * 14 + 2}" y="{gy + 7 * step + 16}" font-family="{MONO}" font-size="11" fill="{MUTED}">more</text></g>
 
 <!-- ===== 4. ACTIVITY & STREAKS (NO DIVIDER LINES) ===== -->
-<text class="f" {d(0.2)} x="44" y="700" font-family="{MONO}" font-size="12" letter-spacing="1" fill="{MUTED}">THE LAST 12 MONTHS ON GITHUB</text>
-<text class="r" {d(0.3)} x="42" y="746" font-family="{SERIF}" font-size="48" fill="{INK}">{data["total_contributions"]:,} <tspan font-style="italic">contributions</tspan></text>
+<text class="f" {d(0.2)} x="44" y="672" font-family="{MONO}" font-size="12" letter-spacing="1" fill="{MUTED}">THE LAST 12 MONTHS ON GITHUB</text>
+<text class="r" {d(0.3)} x="42" y="718" font-family="{SERIF}" font-size="48" fill="{INK}">{data["total_contributions"]:,} <tspan font-style="italic">contributions</tspan></text>
 {''.join(bars)}
 {''.join(side)}
 """
