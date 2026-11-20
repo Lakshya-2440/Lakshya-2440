@@ -4,11 +4,14 @@
 @keyframes grow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
 @keyframes pop{0%{opacity:0;transform:scale(.3)}70%{opacity:1;transform:scale(1.15)}100%{opacity:1;transform:none}}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+@keyframes nudgeup{0%,100%{transform:none}50%{transform:translate(3px,-3px)}}
 .r{opacity:0;animation:rise .8s cubic-bezier(.2,.7,.2,1) both;transform-box:fill-box}
 .f{opacity:0;animation:fade .9s ease-out both}
 .g{transform-box:fill-box;transform-origin:bottom;transform:scaleY(0);animation:grow .8s cubic-bezier(.2,.7,.2,1) both}
 .p{opacity:0;transform-box:fill-box;transform-origin:center;animation:pop .4s ease-out both}
-@media (prefers-reduced-motion: reduce){.r,.f,.g,.p{animation:none!important;opacity:1!important;transform:none!important}}
+.live{animation:pulse 1.6s ease-in-out infinite}
+.nu{transform-box:fill-box;animation:nudgeup 1.8s ease-in-out infinite}
+@media (prefers-reduced-motion: reduce){.r,.f,.g,.p,.live,.nu{animation:none!important;opacity:1!important;transform:none!important}}
 </style>
 <rect width="880" height="340" rx="14" fill="#f3f3f1"/>
 <text class="f" style="animation-delay:0.20s" x="40" y="58" font-family="'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" letter-spacing="1" fill="#6e6e73">THE LAST 12 MONTHS ON GITHUB</text>
